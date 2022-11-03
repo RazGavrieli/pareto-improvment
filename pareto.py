@@ -38,10 +38,14 @@ def isParetoOptimal(agents:list[Agent], option:int, allOptions:list[int]) -> boo
     return True
 
 def egalitarian(agents:list[Agent], allOptions:list[int]=[0,1,2,3,4]) -> int:
+    """
+    gets a list of agents and options, returns the option that is egalitarian.
+    returns the option that maximizes the minimum value for an agent
+    """
     z=0
     maxMin = -1
     for i in allOptions:
-        currMin = 99999
+        currMin = 9999999
         for agent in agents:
             if agent.value(i) < currMin:
                 currMin = agent.value(i)
@@ -66,7 +70,7 @@ if __name__ == "__main__":
         currOptions = [item for item in [0,1,2,3,4] if item not in [i]]
         for agent in agents:
             sum += agent.value(i)
-        print(i, isParetoOptimal(agents=agents, option=i, allOptions=currOptions), sum)
+        print("option number ",i, "|is pareto optimal: ", isParetoOptimal(agents=agents, option=i, allOptions=currOptions),"|utilitarian sum: ",  sum)
         
         
     print(egalitarian(agents=agents, allOptions=[0,1,2,3,4]))
